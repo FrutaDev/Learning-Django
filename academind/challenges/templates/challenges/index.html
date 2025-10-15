@@ -6,16 +6,15 @@
 {% endblock %}
 
 
-
-
 {% block title_page %}
     Index Challenges
 {% endblock %}
-
 {% block content %}
+    {% include "./includes/header.html" %}
     <ul>
         {% for month in months%}
             <li><a href="{% url "month-challenge" month %}">{{ month|title }}</a></li>
         {%endfor%}
     </ul>
 {% endblock %}
+
