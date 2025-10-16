@@ -29,3 +29,8 @@ header nav a:hover,
 header nav a:active {
     color: #9b59b6;
 }
+
+.nav-header {
+    display: flex;
+    gap: 1rem;
+}

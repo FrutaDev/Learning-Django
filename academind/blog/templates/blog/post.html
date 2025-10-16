@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css_file %}
+    <link rel="stylesheet" href="{% static 'blog/post.css' %}">
+{% endblock %}
+
+{% block title_page %}
+    {{ post.title }}
+{% endblock %}
+
+{% block content %}
+    {% include "header.html" %}
+
+    <main class="post-detail">
+        <article class="post-article">
+            <header class="post-header">
+                <h1>{{ post.title }}</h1>
+                <p>By {{ post.author }}</p>
+            </header>
+            <section class="post-content">
+                {{ post.content|linebreaks }}
+            </section>
+        </article>
+    </main>
+
+    {% include "footer.html" %}
+{% endblock %}

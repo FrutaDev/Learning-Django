@@ -1,7 +1,6 @@
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect, Http404
+from django.http import HttpResponseNotFound, HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.shortcuts import render
-# Create your views here.
 
 monthly_challenges = {
     "january": "Eat no meat for the entire month!",

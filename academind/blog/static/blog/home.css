@@ -1,0 +1,73 @@
+.main-container {
+    display: flex;
+    text-align: center;
+    margin: 2rem auto;
+    width: 90%;
+}
+
+.profile-picture {
+    width: 40%;
+}
+
+.home {
+    width: 40%;
+    padding: 1rem;
+    text-align: left;
+}
+
+.profile-picture {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.profile-picture img {
+    width: 40%;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    margin-right: 2rem;
+}
+
+.cards {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem auto;
+    width: 90%;
+    padding: 2rem auto;
+    height: 40%;
+}
+
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 12px;
+    width: 70%;
+    height:80%;
+    max-width: 40rem;
+    text-align: left;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    padding: 4rem;
+    box-sizing: border-box;
+}
+
+.card:hover,
+.card:active {
+    background-color: rgba(137, 43, 226, 0.362);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-8px);
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+}
+
+.readmore {
+    flex-direction: column;
+}

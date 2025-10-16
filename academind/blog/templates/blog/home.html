@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_file %}
+
+{% endblock %}
+
+
+{% block title_page %}
+
+{% endblock %}
+
+{% block content %}
+    {% include "header.html" %}
+
+    {% include "../blog/includes/profile.html" %}
+    
+    {% comment %} {% include "../blog/includes/cards.html" %} {% endcomment %}
+
+    {% include "footer.html" %}
+{% endblock %}

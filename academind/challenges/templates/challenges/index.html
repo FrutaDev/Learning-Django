@@ -10,7 +10,7 @@
     Index Challenges
 {% endblock %}
 {% block content %}
-    {% include "./includes/header.html" %}
+    {% include "header.html" %}
     <ul>
         {% for month in months%}
             <li><a href="{% url "month-challenge" month %}">{{ month|title }}</a></li>
