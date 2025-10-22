@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
-
 {% load static %}
+
 
 {% block css_file %}
     <link rel="stylesheet" href="{% static 'blog/post.css' %}">
 {% endblock %}
 
 {% block title_page %}
-    {{ post.title }}
+    {{ title|title }}
 {% endblock %}
 
 {% block content %}
@@ -16,12 +16,13 @@
     <main class="post-detail">
         <article class="post-article">
             <header class="post-header">
-                <h1>{{ post.title }}</h1>
-                <p>By {{ post.author }}</p>
+                <img src="{% static 'majorasmoon.jpg' %}" alt="Django Logo" width="150">
             </header>
-            <section class="post-content">
-                {{ post.content|linebreaks }}
-            </section>
+            <h1>{{ title|title }}</h1>
+            <div class="post-content">
+                {{ content|linebreaks }}
+            </div>
+            <address class="author-post">By <a class="mail-text" href="mailto:{{author.email}}">{{ author }}</a> </address>
         </article>
     </main>
 

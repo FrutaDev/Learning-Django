@@ -17,17 +17,12 @@ header nav a {
     font-weight: bold;
     font-size: 1.5rem;
     padding: 2px 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 12px;
+    color: #333;
 }
 
-header nav:hover,
-header nav:active {
-    color: #9b59b6;
-}
 header nav a:hover,
 header nav a:active {
-    color: #9b59b6;
+    color: #530d6e;
 }
 
 .nav-header {

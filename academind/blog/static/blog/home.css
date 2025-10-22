@@ -30,14 +30,14 @@
 
 .cards {
     display: flex;
+    flex-direction: row;
     flex: 1;
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
-    margin: 2rem auto;
-    width: 90%;
-    padding: 2rem auto;
+    margin: 5rem auto;
+    background-color: #2c015d55;
     height: 40%;
 }
 
@@ -46,11 +46,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     border-radius: 12px;
-    width: 70%;
     height:80%;
-    max-width: 40rem;
+    max-width: 20rem;
     text-align: left;
     text-decoration: none;
     color: black;
@@ -70,4 +70,24 @@
 
 .readmore {
     flex-direction: column;
+}
+
+.card-image img {
+    border-radius: 12px 12px 0 0;
+    padding: 5px;
+}
+
+.card-link {
+    width: auto;
+    text-decoration: none;
+    color: inherit;
+}
+
+.author-card {
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    color: #555;
+    margin-top: 0.5rem;
+    opacity: 0.6;
 }
