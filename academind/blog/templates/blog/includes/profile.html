@@ -29,11 +29,23 @@
             <div class="card-content">
                 <h3>{{ post.title }}</h3>
                 <p>{{ post.content }}</p>
-                <p class="author-card">Written by {{ post.author }}</p>
+                <p class="author-card">Por {{ post.author }}</p>
             </div>
         </div>
         <a/>
         {% endfor %}
     </section>
+
+    <footer>
+        <form method="POST" action="/">
+            {% csrf_token %}
+            <div class="subscribe-form {% if form.errors %}errors{% endif %}">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+            <button>Suscribirse</button>
+        <form>
+    </footer>
     
 </div>

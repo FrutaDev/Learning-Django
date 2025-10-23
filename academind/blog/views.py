@@ -1,27 +1,37 @@
 from django.shortcuts import render, get_object_or_404
-from datetime import date
-from .models import Post
+from django.views import View
+from django.http import HttpResponseRedirect
 
-# fake_posts = [
-#     {
-#         "title": "My first post",
-#         "content": "This is my first post",
-#         "slug": "my-first-post",
-#         "image": "blog/images/django.png",
-#         "date": date(2024,6,2),
-#         "author": "Ronaldo",
-#         "image": ""
-#     },
-#     {
-#         "title": "My second post",
-#         "content": "This is my second post",
-#         "slug": "my-second-post",
-#         "image": "blog/images/django.png",
-#         "date": date(2024,6,2),
-#         "author": "Ronaldo",
-#         "image": ""
-#     },
-# ]
+from .models import Post, Subscriber
+from .forms import SubscriberForm
+
+class IndexView(View):
+    def get(self, request):
+        form = SubscriberForm()
+        latest_posts = Post.objects.all().order_by("-date")[:3]
+        return render(request, "blog/home.html", {
+            "posts": latest_posts,
+            "form": form
+        })
+    
+    def post(self, request):
+        form = SubscriberForm(request.POST)
+        exists_email = Subscriber.objects.filter(email=request.POST['email']).first()
+        
+        if form.is_valid():
+            if exists_email is not None:
+                form.add_error("email", "Este correo ya está suscrito.")
+            else:
+                form.save()
+                return HttpResponseRedirect("/")
+        latest_posts = Post.objects.all().order_by("-date")[:3]
+        return render(request, "blog/home.html", {
+            "form": form,
+            "posts": latest_posts
+            })
+
+
+
 
 def get_date(post):
     return post.date
@@ -30,12 +40,6 @@ def posts(request):
     posts = Post.objects.all().order_by("-date")
     return render(request, "blog/home.html", {
         "posts": posts               
-    })
-
-def index(request):
-    latest_posts = Post.objects.all().order_by("-date")[:3]
-    return render(request, "blog/home.html", {
-        "posts": latest_posts,
     })
 
 # def all_posts(request):

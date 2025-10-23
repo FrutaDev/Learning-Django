@@ -21,6 +21,8 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(default="",blank=True, null=False, max_length=100, db_index=True)
@@ -36,3 +38,12 @@ class Post(models.Model):
     def save (self, *args, **kwargs):
         self.slug = slugify(self.title) 
         super().save(*args, **kwargs)
+
+
+
+class Subscriber(models.Model):
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.email
+    
