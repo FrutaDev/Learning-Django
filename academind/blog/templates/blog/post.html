@@ -26,5 +26,24 @@
         </article>
     </main>
 
+
+    <section class="comments-section">
+        <div class"comments-div">
+            {% for comment in comments %}
+                {{ comment.user_name }}
+                {{ comment.text }}
+                {{ comment.date }}
+            {%endfor%}
+        </div>
+        <form method="POST" action="{% url "detail-post-page" slug=slug %}">
+            {% csrf_token %}
+            <div class="comments-form {% if form.errors %}errors{% endif %}">
+                {{ form.text }}
+                {{ form.errors }}
+                <button>Comentar</button>
+            </div>
+        <form>
+    </section>
+
     {% include "footer.html" %}
 {% endblock %}

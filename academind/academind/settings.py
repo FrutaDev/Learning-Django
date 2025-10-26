@@ -129,3 +129,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     BASE_DIR / "blog/templates/static",
 ]
+
+MEDIA_URL = '/user-media/'
+MEDIA_ROOT = BASE_DIR / "uploads"

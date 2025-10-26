@@ -1,3 +1,4 @@
+from tkinter import CASCADE
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
@@ -28,7 +29,7 @@ class Post(models.Model):
     slug = models.SlugField(default="",blank=True, null=False, max_length=100, db_index=True)
     content = models.TextField()
     date = models.DateField(auto_now_add=True)
-    image = models.ImageField(upload_to="blog/images", null=True, blank=True)
+    image = models.ImageField(upload_to="uploads/images", null=True, blank=True)
     author = models.ForeignKey("Author", related_name="posts", on_delete=models.SET_NULL, null=True)
     tags = models.ManyToManyField("Tag", related_name="posts", blank=True)
 
@@ -39,10 +40,21 @@ class Post(models.Model):
         self.slug = slugify(self.title) 
         super().save(*args, **kwargs)
 
+class Comment(models.Model):
+    user_name = models.CharField(max_length=100)
+    text = models.TextField()
+    date = models.DateField(auto_now_add=True)
+    is_approved = models.BooleanField(default=False)
+    post = models.ForeignKey("Post", on_delete=models.CASCADE, related_name="comments", default="")
+
+    def __str__(self):
+        return f"Comentado por {self.user_name} en {self.post.title}"
+
 
 
 class Subscriber(models.Model):
     email = models.EmailField()
+
 
     def __str__(self):
         return self.email

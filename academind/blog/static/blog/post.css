@@ -37,3 +37,22 @@
 .mail-text {
     color: #530d6e;
 }
+
+.comments-section {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+    border: 1px solid #ccc;
+    max-width: 40vw;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 12px;
+}
+
+.comments-div {
+    margin: 5rem;
+}
+
+.comments-form {
+    display: block;
+}

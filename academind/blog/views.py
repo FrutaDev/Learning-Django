@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.http import HttpResponseRedirect
 
-from .models import Post, Subscriber
-from .forms import SubscriberForm
+from .models import Post, Subscriber, Comment
+from .forms import SubscriberForm, CommentForm
 
 class IndexView(View):
     def get(self, request):
@@ -48,16 +48,45 @@ def posts(request):
 #         "posts": posts
 #     })
 
-def one_post(request, slug):
-    detailed_post = get_object_or_404(
+class PostDetailView(View):
+    def get(self, request, slug):
+        form = CommentForm()
+        detailed_post = get_object_or_404(
         Post,
         slug=slug
     )
-    return render(request, "blog/post.html", {
-        "title": detailed_post.title,
-        "content": detailed_post.content,
-        "date": detailed_post.date,
-        "image": detailed_post.image,
-        "author": detailed_post.author,
-        "tags": detailed_post.tags.all()
+        return render(request, "blog/post.html", {
+            "title": detailed_post.title,
+            "content": detailed_post.content,
+            "date": detailed_post.date,
+            "image": detailed_post.image,
+            "author": detailed_post.author,
+            "tags": detailed_post.tags.all(),
+            "form": form,
+            "comments": detailed_post.comments.filter(is_approved=True),
+            "slug": slug
+
     })
+
+    def post(self, request, slug):
+        form = CommentForm(request.POST)
+        detailed_post = get_object_or_404(
+            Post,
+            slug=slug
+        )
+        comments_post = Comment.objects.filter(post=detailed_post, is_approved=True)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = detailed_post
+            comment.save()
+            return HttpResponseRedirect(f"/posts/{slug}")
+        return render(request, "blog/post.html", {
+            "title": detailed_post.title,
+            "content": detailed_post.content,
+            "date": detailed_post.date,
+            "image": detailed_post.image,
+            "author": detailed_post.author,
+            "tags": detailed_post.tags.all(),
+            "form": form,
+            "comments": comments_post
+        })
