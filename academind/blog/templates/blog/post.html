@@ -19,6 +19,9 @@
                 <img src="{% static 'majorasmoon.jpg' %}" alt="Django Logo" width="150">
             </header>
             <h1>{{ title|title }}</h1>
+            {% for tag in tags %}
+                <span class="tag-span"> {{ tag }} </span>
+            {% endfor %}
             <div class="post-content">
                 {{ content|linebreaks }}
             </div>
@@ -28,16 +31,17 @@
 
 
     <section class="comments-section">
-        <div class"comments-div">
-            {% for comment in comments %}
-                {{ comment.user_name }}
-                {{ comment.text }}
-                {{ comment.date }}
+        {% for comment in comments %}
+            <div class="comments-div">
+                <strong>{{ comment.user_name }}</strong>
+                <p>{{ comment.text }}</p>
+                <span>{{ comment.date }}</span>
+            </div>
             {%endfor%}
-        </div>
         <form method="POST" action="{% url "detail-post-page" slug=slug %}">
             {% csrf_token %}
             <div class="comments-form {% if form.errors %}errors{% endif %}">
+                {{ form.user_name }}
                 {{ form.text }}
                 {{ form.errors }}
                 <button>Comentar</button>

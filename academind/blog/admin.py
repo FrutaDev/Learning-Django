@@ -11,9 +11,12 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ("title", "content", "author__first_name", "author__last_name", "tags__name")
     
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ("user_name", "date", "is_approved")
+    list_display = ("user_name", "date", "is_approved", "post_slug")
     list_filter = ("is_approved", "date")
     search_fields = ("user_name", "date", "is_approved")
+    
+    def post_slug(self, obj):
+        return obj.post.slug
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Author)

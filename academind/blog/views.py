@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from .models import Post, Subscriber, Comment
 from .forms import SubscriberForm, CommentForm
@@ -79,8 +80,9 @@ class PostDetailView(View):
             comment = form.save(commit=False)
             comment.post = detailed_post
             comment.save()
-            return HttpResponseRedirect(f"/posts/{slug}")
+            return HttpResponseRedirect(reverse("detail-post-page", kwargs={"slug": slug}))
         return render(request, "blog/post.html", {
+            "slug": detailed_post.slug,
             "title": detailed_post.title,
             "content": detailed_post.content,
             "date": detailed_post.date,
@@ -90,3 +92,4 @@ class PostDetailView(View):
             "form": form,
             "comments": comments_post
         })
+    
